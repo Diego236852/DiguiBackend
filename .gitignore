@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+# bash to execute in server
+.run
