@@ -8,6 +8,10 @@ app.use(express.json());
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     
+    let response = {
+        textoReal: "Kevin es gay"
+    }
+
     res.send(response);
 });
 
