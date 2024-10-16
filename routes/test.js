@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const fs = require('node:fs/promises');
+const fs = require('node:fs');
 
 app = express();
 
@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
     res.render("test")
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', (req, res, next) => {
     let input = req.body;
 
     try {
