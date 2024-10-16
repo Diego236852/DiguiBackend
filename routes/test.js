@@ -9,10 +9,10 @@ app.use(express.json());
 router.get('/', function(req, res, next) {
     
     let response = {
-        textoReal: "Kevin es gay"
+        textoReal: "Yo es gay"
     }
 
-    res.send(response);
+    res.render("test")
 });
 
 router.post('/', (req, res, next) => {
