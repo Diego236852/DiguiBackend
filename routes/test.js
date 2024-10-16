@@ -25,6 +25,8 @@ router.post('/', (req, res, next) => {
     } catch (err) {
         throw err;
     }
+
+    res.send("Se agrego correctamente");
 });
 
 module.exports = router;
