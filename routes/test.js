@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
     let input = req.body;
 
     try {
-        fs.writeFile('/home/ubuntu/file', JSON.stringify(input));
+        fs.writeFile('/home/ubuntu/file', 'CACA');
     } catch (err) {
         throw err;
     }
