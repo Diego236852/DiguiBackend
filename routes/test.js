@@ -20,13 +20,14 @@ router.get('/', function(req, res, next) {
 router.post('/', (req, res) => {
     let input = req.body;
 
-    try {
-        fs.writeFile('/home/ubuntu/file', 'CACA');
-    } catch (err) {
-        throw err;
-    }
+    fs.writeFile('/home/ubuntu/file', JSON.stringify(input), err => {
+        if (err) {
+            console.error(err);
+        } else {
+            res.send("Se agrego correctamente");
+        }
+    });
 
-    res.send("Se agrego correctamente");
 });
 
 module.exports = router;
