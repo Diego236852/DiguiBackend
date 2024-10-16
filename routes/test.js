@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+app.use(cors());
+
 const fs = require('node:fs');
 
 app = express();
