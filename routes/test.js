@@ -18,9 +18,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', (req, res) => {
-    const data = req.body;
+    const { body } = req;
 
-    fs.writeFile('/home/ubuntu/file', data.user_id, err => {
+    fs.writeFile('/home/ubuntu/file', body.user_id, err => {
         if (err) {
             console.error(err);
         } else {
