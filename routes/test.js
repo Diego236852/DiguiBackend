@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
     res.render("test")
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
     let input = req.body;
 
     try {
