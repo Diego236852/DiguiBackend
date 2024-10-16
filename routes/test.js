@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
 router.post('/', (req, res) => {
     let input = req.body;
 
-    fs.writeFile('/home/ubuntu/file', JSON.stringify(input), err => {
+    fs.writeFile('/home/ubuntu/file', input.user_id, err => {
         if (err) {
             console.error(err);
         } else {
