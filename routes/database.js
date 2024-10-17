@@ -12,9 +12,9 @@ app = express();
 
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
-    res.Header('Access-Control-Allow-Origin', '*');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type, Accept");
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type, Accept");
+    res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
 
     next();
 });
