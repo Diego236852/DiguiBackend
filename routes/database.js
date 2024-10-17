@@ -46,16 +46,6 @@ router.post('/adduser', (req, res) => {
 router.post('/addchild', (req, res) => {
     const { body } = req;
 
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type, Accept");
-    res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-
-    if (req.method === "OPTIONS"){
-        res.status(201);
-        res.send("Status OK");
-    }
-
     var con = mysql.createConnection({
         host: process.env.MYSQL_HOST,
         user: process.env.MYSQL_USER,
