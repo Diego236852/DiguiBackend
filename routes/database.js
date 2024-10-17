@@ -41,7 +41,7 @@ router.post('/adduser', (req, res) => {
     res.send("Algo inesperado a sucedido");
 });
 
-router.get('/addchild', (req, res) => {
+router.post('/addchild', (req, res) => {
     const { body } = req;
 
     var con = mysql.createConnection({
