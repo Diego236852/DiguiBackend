@@ -18,7 +18,10 @@ router.get('/', function(req, res, next) {
     });
 
     con.connect((err) => {
-        if (err) throw err;
+        if (err) {
+            res.send("An error ocurred")
+            throw err;
+        }
         res.send("Connected!!!");
     })
 });
