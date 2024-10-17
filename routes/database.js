@@ -80,7 +80,7 @@ router.post('/addchild', (req, res) => {
                 res.send("An error ocurred when creating child");
                 throw err;
             }
-            child_id = result.id;
+            res.send(result);
         });
         
         //Se hace un loop por cada id de la taba Juego
@@ -96,7 +96,6 @@ router.post('/addchild', (req, res) => {
 
     });
 
-    res.send("Algo inesperado sucedio");
 });
 
 router.get('/getparentschildren', (req, res) => {
