@@ -94,6 +94,8 @@ router.post('/addchild', (req, res) => {
         //     });        
         // }
 
+        res.send("Se creo un hijo exitosamente");
+
     });
 
 });
