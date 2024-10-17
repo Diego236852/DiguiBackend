@@ -1,11 +1,8 @@
 var express = require('express');
 var mysql = require('mysql2');
-
-const cors = require('cors');
-
+var cors = require('cors');
+var fs = require('node:fs');
 require('dotenv').config({path:'/home/ubuntu/DiguiBackend/.env'});
-
-const fs = require('node:fs');
 
 app = express();
 
@@ -14,7 +11,7 @@ app.options('*', cors());
 
 app.use(express.json());
 
-var router = express.Router();
+var router = app.Router();
 
 router.post('/adduser', (req, res) => {
     const { body } = req;
