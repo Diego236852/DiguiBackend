@@ -94,23 +94,20 @@ router.post('/addchild', (req, res) => {
     });
 
     // Se hace un loop por cada id de la taba Juego
-    for (let i = 1;  i <= 4; i++) {     
-        con.connect((err) => {
+    con.connect((err) => {
+        if (err) {
+            res.send("An error ocurred when connecting");
+            throw err;
+        }
+
+        let sql = `INSERT INTO Nino_Juego (Nino_id, Juego_id, Victorias, Perdidas, Puntaje) VALUES (${child_id}, 1, 0, 0)`;
+        con.query(sql, (err, result) => {
             if (err) {
-                res.send("An error ocurred when connecting");
+                res.send("An error ocurred when creating child");
                 throw err;
             }
-    
-            let sql = `INSERT INTO Nino_Juego (Nino_id, Juego_id, Victorias, Perdidas, Puntaje) VALUES (${child_id}, ${i}, 0, 0)`;
-                con.query(sql, (err, result) => {
-                    if (err) {
-                        res.send("An error ocurred when creating child");
-                        throw err;
-                    }
-                });
         });
-    }
-
+    });
 
     res.send("Se creo un hijo exitosamente");
 });
