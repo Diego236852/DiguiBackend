@@ -4,14 +4,13 @@ var cors = require('cors');
 var fs = require('node:fs');
 require('dotenv').config({path:'/home/ubuntu/DiguiBackend/.env'});
 
-app = express();
+var router = express.Router();
 
-app.use(cors({origin:'*',credentials: true}));
-app.options('*', cors());
+router.use(cors({origin:'*',credentials: true}));
+router.options('*', cors());
 
-app.use(express.json());
+router.use(express.json());
 
-var router = app.Router();
 
 router.post('/adduser', (req, res) => {
     const { body } = req;
