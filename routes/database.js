@@ -1,5 +1,4 @@
 var express = require('express');
-var router = express.Router();
 var mysql = require('mysql2');
 
 const cors = require('cors');
@@ -14,6 +13,8 @@ app.use(cors({origin:'*',credentials: true}));
 app.options('*', cors());
 
 app.use(express.json());
+
+var router = express.Router();
 
 router.post('/adduser', (req, res) => {
     const { body } = req;
