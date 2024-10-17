@@ -64,17 +64,17 @@ router.post('/addchild', (req, res) => {
             throw err;
         }
 
-        // let sql = `INSERT INTO Nino (id, Padre_id, Nombre, Apellido) OUTPUT Inserted.id VALUES (NULL, '${email_padre}', '${nombre}', '${apellido}')`
-        // con.query(sql, (err, result) => {
-        //     if (err) {
-        //         res.send("An error ocurred when creating child");
-        //         throw err;
-        //     }
-        // });
+        let sql = `INSERT INTO Nino (id, Padre_id, Nombre, Apellido) OUTPUT Inserted.id VALUES (NULL, '${email_padre}', '${nombre}', '${apellido}')`
+        con.query(sql, (err, result) => {
+            if (err) {
+                res.send("An error ocurred when creating child");
+                throw err;
+            }
+        });
         
         let child_id;
 
-        let sql = `SELECT SELECT last_insert_id() AS id`;
+        sql = `SELECT SELECT last_insert_id() AS id`;
         con.query(sql, (err, result) => {
             if (err) {
                 res.send("An error ocurred when creating child");
