@@ -7,27 +7,30 @@ app = express();
 
 app.use(express.json());
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-    
-    let response = {
-        textoReal: "Yo es gay"
-    }
-
-    res.render("test")
-});
-
 router.post('/adduser', (req, res) => {
     const { body } = req;
 
-    fs.writeFile('/home/ubuntu/file', body.user_id, err => {
-        if (err) {
-            console.error(err);
-        } else {
-            res.send("Se agrego correctamente");
-        }
+    var con = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: "digui"
     });
 
+    con.connect((err) => {
+        if (err) {
+            res.send("An error ocurred when connecting")
+            throw err;
+        }
+        let sql = `INSERT INTO Padre (auth) VALUES (${body.user_id})`;
+        con.query(sql, (err, result) => {
+            if (err) {
+                res.send("An error ocurred when trying to insert USER_ID");
+                throw err;
+            }
+            res.send("Se agrego un usuario");
+        });
+    });
 });
 
 module.exports = router;
