@@ -53,10 +53,8 @@ router.options('addchild', (req, res) => {
     res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
 
-    if (req.method === "OPTIONS"){
-        res.status(201);
-        res.send("Status OK");
-    }
+    res.status(201).end();
+    res.send("Status OK");
 })
 
 router.post('/addchild', (req, res) => {
