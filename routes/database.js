@@ -54,7 +54,8 @@ router.post('/addchild', (req, res) => {
     res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
 
     if (req.method === "OPTIONS"){
-        return res.status(201).end();
+        res.status(201);
+        res.send("Status OK");
     }
 
     var con = mysql.createConnection({
