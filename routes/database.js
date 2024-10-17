@@ -20,27 +20,29 @@ router.post('/adduser', (req, res) => {
         database: "digui"
     });
 
-    let user_id = body.user_id;
+    let email = body.email;
 
     con.connect((err) => {
         if (err) {
-	    res.send("An error ocurred when connecting");
+    	    res.send("An error ocurred when connecting");
             throw err;
-	    return;
         }
-        let sql = `INSERT INTO Padre (auth) VALUES ('${user_id}')`;
+        let sql = `INSERT INTO Padre (auth) VALUES ('${email}')`;
         con.query(sql, (err, result) => {
             if (err) {
                 res.send("An error ocurred when adding USER_ID");
-		throw err;
-		return;
+		        throw err;
             }
-	    res.send("USER_ID added succesfuly");
-	    return;
+	        res.send("USER_ID added succesfuly");
+	        return;
         });
     });
 
     res.send("Algo inesperado a sucedido");
 });
+
+router.get('/getuserid', (req, res) => {
+    
+})
 
 module.exports = router;
