@@ -57,6 +57,9 @@ router.post('/addchild', (req, res) => {
     let email_padre = body.email_padre;
     let nombre = body.nombre;
     let apellido = body.apellido;
+    
+    
+    let child_id;
 
     con.connect((err) => {
         if (err) {
@@ -71,10 +74,16 @@ router.post('/addchild', (req, res) => {
                 throw err;
             }
         });
-        
-        let child_id;
+    });
 
-        sql = `SELECT SELECT last_insert_id() AS id`;
+
+    con.connect((err) => {
+        if (err) {
+            res.send("An error ocurred when connecting");
+            throw err;
+        }
+
+        let sql = `SELECT SELECT last_insert_id() AS id`;
         con.query(sql, (err, result) => {
             if (err) {
                 res.send("An error ocurred when creating child");
@@ -82,22 +91,28 @@ router.post('/addchild', (req, res) => {
             }
             child_id = result.id;
         });
-        
-        // Se hace un loop por cada id de la taba Juego
-        for (let i = 1;  i <= 4; i++) {
-            sql = `INSERT INTO Nino_Juego (Nino_id, Juego_id, Victorias, Perdidas, Puntaje) VALUES (${child_id}, ${i}, 0, 0)`;
-            con.query(sql, (err, result) => {
-                if (err) {
-                    res.send("An error ocurred when creating child");
-                    throw err;
-                }
-            });        
-        }
-
-        res.send("Se creo un hijo exitosamente");
-
     });
 
+    // Se hace un loop por cada id de la taba Juego
+    for (let i = 1;  i <= 4; i++) {     
+        con.connect((err) => {
+            if (err) {
+                res.send("An error ocurred when connecting");
+                throw err;
+            }
+    
+            let sql = `INSERT INTO Nino_Juego (Nino_id, Juego_id, Victorias, Perdidas, Puntaje) VALUES (${child_id}, ${i}, 0, 0)`;
+                con.query(sql, (err, result) => {
+                    if (err) {
+                        res.send("An error ocurred when creating child");
+                        throw err;
+                    }
+                });
+        });
+    }
+
+
+    res.send("Se creo un hijo exitosamente");
 });
 
 router.get('/getparentschildren', (req, res) => {
