@@ -57,14 +57,14 @@ router.post('/addchild', (req, res) => {
     let email_padre = body.email_padre;
     let nombre = body.nombre;
     let apellido = body.apellido;
-    
+
     con.connect((err) => {
         if (err) {
             res.send("An error ocurred when connecting");
             throw err;
         }
 
-        let sql = `CALL test('${email_padre}', '${nombre}', '${apellido}')`
+        let sql = `CALL Add_child('${email_padre}', '${nombre}', '${apellido}')`
         con.query(sql, (err, result) => {
             if (err) {
                 res.send("An error ocurred when creating child");
