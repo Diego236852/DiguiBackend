@@ -2,6 +2,7 @@ var express = require('express');
 var mysql = require('mysql2');
 var cors = require('cors');
 var fs = require('node:fs');
+const { chdir } = require('node:process');
 require('dotenv').config({path:'/home/ubuntu/DiguiBackend/.env'});
 
 var router = express.Router();
@@ -62,7 +63,8 @@ router.post('/addchild', (req, res) => {
             res.send("An error ocurred when connecting");
             throw err;
         }
-        let sql = `INSERT INTO Nino (id, Padre_id, Nombre, Apellido) VALUES (NULL, '${email_padre}', '${nombre}', '${apellido}')`
+
+        let sql = `INSERT INTO Nino (id, Padre_id, Nombre, Apellido) OUTPUT Inserted.id VALUES (NULL, '${email_padre}', '${nombre}', '${apellido}')`
         con.query(sql, (err, result) => {
             if (err) {
                 res.send("An error ocurred when creating child");
@@ -71,6 +73,28 @@ router.post('/addchild', (req, res) => {
             res.send("Child created succesfully");
             return;
         });
+        
+        let child_id;
+
+        sql = `SELECT SELECT last_insert_id() AS id;`;
+        con.query(sql, (err, result) => {
+            if (err) {
+                res.send("An error ocurred when creating child");
+                throw err;
+            }
+            chdild_id = result.id;
+        });
+        
+        for (let i = 1; i <= 4; i++) {
+            sql = `INSERT INTO Nino_Juego (Nino_id, Juego_id, Victorias, Perdidas, Puntaje) VALUES (${child_id}, ${i}, 0, 0)`;
+            con.query(sql, (err, result) => {
+                if (err) {
+                    res.send("An error ocurred when creating child");
+                    throw err;
+                }
+            });        
+        }
+
     });
 
     res.send("Algo inesperado sucedio");
