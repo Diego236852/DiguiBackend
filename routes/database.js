@@ -45,18 +45,6 @@ router.post('/adduser', (req, res) => {
     res.send("Algo inesperado a sucedido");
 });
 
-router.options('addchild', (req, res) => {
-    const { body } = req;
-
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type, Accept");
-    res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-
-    res.status(201).end();
-    res.send("Status OK");
-})
-
 router.post('/addchild', (req, res) => {
     const { body } = req;
 
