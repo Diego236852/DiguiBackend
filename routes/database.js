@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var mysql = require('mysql2');
+
+require('dotenv').config({path:__dirname+'../.env'});
 
 const fs = require('node:fs');
 
