@@ -15,7 +15,7 @@ router.use(express.json());
 router.post('/adduser', (req, res) => {
     const { body } = req;
 
-    var con = mysql.createConnection({
+    let con = mysql.createConnection({
         host: process.env.MYSQL_HOST,
         user: process.env.MYSQL_USER,
         password: process.env.MYSQL_PASSWORD,
@@ -46,7 +46,7 @@ router.post('/adduser', (req, res) => {
 router.post('/addchild', (req, res) => {
     const { body } = req;
 
-    var con = mysql.createConnection({
+    let con = mysql.createConnection({
         host: process.env.MYSQL_HOST,
         user: process.env.MYSQL_USER,
         password: process.env.MYSQL_PASSWORD,
@@ -74,6 +74,35 @@ router.post('/addchild', (req, res) => {
     });
 
     res.send("Algo inesperado sucedio");
+});
+
+router.get('/getparentschildren', (req, res) => {
+    const { body } = req;
+
+    let con = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: "digui"
+    });
+
+    let email_padre = body.email_padre;
+
+    con.connect((err) => {
+        if (err) {
+            res.send("An error ocurred when connecting");
+            throw err;
+        }
+        let sql = `SELECT Nino.id AS id, Nino.Nombre AS nombre, Nino.Apellido AS apellido FROM Nino JOIN Padre ON Nino.Padre_id = Padre.auth`;
+        con.query(sql, (err, result) => {
+            if (err) {
+                res.send("An error ocurred when creating child");
+                throw err;
+            }
+            res.send(result);
+            return;
+        });
+    });
 });
 
 module.exports = router;
