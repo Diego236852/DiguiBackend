@@ -12,9 +12,9 @@ app.use(express.json());
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     var con = mysql.createConnection({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD
+        host: "database-diguiapp.ctm0c4k4wncm.us-east-2.rds.amazonaws.com",
+        user: "admin",
+        password: "DIB45qlce503bc4d9fq5"
     });
 
     con.connect((err) => {
