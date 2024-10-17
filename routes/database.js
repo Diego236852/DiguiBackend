@@ -41,8 +41,37 @@ router.post('/adduser', (req, res) => {
     res.send("Algo inesperado a sucedido");
 });
 
-router.get('/getuserid', (req, res) => {
-    
-})
+router.get('/addchild', (req, res) => {
+    const { body } = req;
+
+    var con = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: "digui"
+    });
+
+    let email_padre = body.email_padre;
+    let nombre = body.nombre;
+    let apellido = body.apellido;
+
+    con.connect((err) => {
+        if (err) {
+            res.send("An error ocurred when connecting");
+            throw err;
+        }
+        let sql = `INSERT INTO Nino (Padre_id, Nombre, Apellido) VALUES ('${email_padre}, ${nombre}, ${apellido}')`
+        con.query(sql, (err, result) => {
+            if (err) {
+                res.send("An error ocurred when creating child");
+                throw err;
+            }
+            res.send("Child created succesfully");
+            return;
+        });
+    });
+
+    res.send("Algo inesperado sucedio");
+});
 
 module.exports = router;
