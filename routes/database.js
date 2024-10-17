@@ -83,7 +83,7 @@ router.post('/addchild', (req, res) => {
             throw err;
         }
 
-        let sql = `SELECT SELECT last_insert_id() AS id`;
+        let sql = `SELECT last_insert_id() AS id`;
         con.query(sql, (err, result) => {
             if (err) {
                 res.send("An error ocurred when creating child");
