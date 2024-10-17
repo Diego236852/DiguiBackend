@@ -72,16 +72,16 @@ router.post('/addchild', (req, res) => {
             }
         });
         
-        let child_id;
+        // let child_id;
 
-        sql = `SELECT SELECT last_insert_id() AS id`;
-        con.query(sql, (err, result) => {
-            if (err) {
-                res.send("An error ocurred when creating child");
-                throw err;
-            }
-            res.send(result);
-        });
+        // sql = `SELECT SELECT last_insert_id() AS id`;
+        // con.query(sql, (err, result) => {
+        //     if (err) {
+        //         res.send("An error ocurred when creating child");
+        //         throw err;
+        //     }
+        //     res.send(result);
+        // });
         
         //Se hace un loop por cada id de la taba Juego
         // for (let i = 1; i <= 4; i++) {
