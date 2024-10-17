@@ -10,15 +10,6 @@ const fs = require('node:fs');
 
 app = express();
 
-app.use(function (req, res, next) {
-    // Website you wish to allow to connect
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type, Accept");
-    res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-
-    next();
-});
-
 app.use(cors());
 
 app.use(express.json());
