@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
-
+var mysql = require('mysql2');
 const fs = require('node:fs');
+
+require('dotenv').config();
 
 app = express();
 
@@ -9,12 +11,16 @@ app.use(express.json());
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    
-    let response = {
-        textoReal: "Yo es gay"
-    }
+    var con = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD
+    });
 
-    res.render("test")
+    con.connect((err) => {
+        if (err) throw err;
+        res.send("Connected!!!");
+    })
 });
 
 router.post('/', (req, res) => {
