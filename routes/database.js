@@ -11,6 +11,7 @@ const fs = require('node:fs');
 app = express();
 
 app.use(cors({origin:'*',credentials: true}));
+app.options('*', cors());
 
 app.use(express.json());
 
