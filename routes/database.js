@@ -70,8 +70,6 @@ router.post('/addchild', (req, res) => {
                 res.send("An error ocurred when creating child");
                 throw err;
             }
-            res.send("Child created succesfully");
-            return;
         });
         
         let child_id;
