@@ -93,16 +93,28 @@ router.get('/getparentschildren', (req, res) => {
             res.send("An error ocurred when connecting");
             throw err;
         }
-        let sql = `SELECT Nino.id, Nino.Nombre, Nino.Apellido FROM Nino WHERE Nino.Padre_id = '${email_padre}';`;
+        let sql = `SELECT Nino.id, Nino.Nombre, Nino.Apellido FROM Nino WHERE Nino.Padre_id = "${email_padre}"`;
         con.query(sql, (err, result) => {
             if (err) {
                 res.send("An error ocurred when creating child");
                 throw err;
             }
             res.send(result);
-            return;
         });
     });
 });
+
+router.post('/increasewins', (req, res) => {
+    const { body } = req;
+
+    let con = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: 'digui'
+    });
+
+    
+})
 
 module.exports = router;
