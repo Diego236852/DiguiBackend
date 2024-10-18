@@ -6,7 +6,7 @@ require('dotenv').config({path:'/home/ubuntu/DiguiBackend/.env'});
 
 var router = express.Router();
 
-router.use(cors({origin: true,credentials: true}));
+router.use(cors());
 router.options('*/*', cors());
 
 router.use(express.json());
