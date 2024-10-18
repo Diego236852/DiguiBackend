@@ -2,7 +2,6 @@ var express = require('express');
 var mysql = require('mysql2');
 var cors = require('cors');
 var fs = require('node:fs');
-const { chdir } = require('node:process');
 require('dotenv').config({path:'/home/ubuntu/DiguiBackend/.env'});
 
 var router = express.Router();
