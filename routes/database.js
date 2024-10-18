@@ -93,7 +93,7 @@ router.get('/getparentschildren', (req, res) => {
             res.send("An error ocurred when connecting");
             throw err;
         }
-        let sql = `SELECT Nino.id AS id, Nino.Nombre AS nombre, Nino.Apellido AS apellido FROM Nino JOIN Padre ON Nino.Padre_id = Padre.auth`;
+        let sql = `SELECT Nino.id, Nino.Nombre, Nino.Apellido FROM Nino WHERE Nino.Padre_id = '${email_padre}';`;
         con.query(sql, (err, result) => {
             if (err) {
                 res.send("An error ocurred when creating child");
