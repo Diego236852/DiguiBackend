@@ -74,6 +74,36 @@ router.post('/addchild', (req, res) => {
     res.send("Se creo un hijo exitosamente");
 });
 
+router.post('/deletechild', (req, res) => {
+    const { body } = req;
+
+    let con = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: "digui"
+    });
+
+    let id = body.child_id;
+
+    con.connect((err) => {
+        if (err){
+            res.send("An error ocurred when connecting");
+            throw err;
+        }
+
+        let sql = `DELETE FROM Nino WHERE id = ${id}`;
+        con.query(sql, (err, result) => {
+            if (err) {
+                res.send("An error ocurred when deleting child");
+                throw err;
+            }
+        });
+    });
+
+    res.send("Se elimino al nino correctamente");
+});
+
 router.get('/getparentschildren', (req, res) => {
     let con = mysql.createConnection({
         host: process.env.MYSQL_HOST,
