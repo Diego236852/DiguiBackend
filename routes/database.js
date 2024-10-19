@@ -161,37 +161,6 @@ router.post('/aumentvictories', (req, res) => {
     res.send("Se aumentaron las victorias exitosamente");
 });
 
-router.post('/aumentvictories', (req, res) => {
-    const { body } = req;
-
-    let con = mysql.createConnection({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: "digui"
-    });
-
-    let id_nino = body.id_nino;
-    let id_juego = body.id_juego;
-
-    con.connect((err) => {
-        if (err) {
-            res.send("An error ocurred when connecting");
-            throw err;
-        }
-
-        let sql = `CALL Aument_victories(${id_nino}, ${id_juego})`
-        con.query(sql, (err, result) => {
-            if (err) {
-                res.send("An error ocurred when aumenting victories");
-                throw err;
-            }
-        });
-    });
-
-    res.send("Se aumentaron las victorias exitosamente");
-});
-
 router.post('/aumentlosses', (req, res) => {
     const { body } = req;
 
