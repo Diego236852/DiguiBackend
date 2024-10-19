@@ -192,4 +192,118 @@ router.post('/aumentlosses', (req, res) => {
     res.send("Se aumentaron las perdidas exitosamente");
 });
 
+router.get('/getvictories', (req, res) => {
+    let con = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: "digui"
+    });
+
+    let id_nino = req.query.id_nino;
+    let id_juego = req.query.id_juego;
+
+    con.connect((err) => {
+        if (err) {
+            res.send("An error ocurred when connecting");
+            throw err;
+        }
+        let sql = `SELECT Victorias FROM Nino_Juego WHERE Nino_id = ${id_nino} AND Juego_id = ${id_juego}`;
+        con.query(sql, (err, result) => {
+            if (err) {
+                res.send("An error ocurred when creating child");
+                throw err;
+            }
+            res.send(result);
+        });
+    });
+});
+
+router.get('/getlosses', (req, res) => {
+    let con = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: "digui"
+    });
+
+    let id_nino = req.query.id_nino;
+    let id_juego = req.query.id_juego;
+
+    con.connect((err) => {
+        if (err) {
+            res.send("An error ocurred when connecting");
+            throw err;
+        }
+        let sql = `SELECT Perdidas FROM Nino_Juego WHERE Nino_id = ${id_nino} AND Juego_id = ${id_juego}`;
+        con.query(sql, (err, result) => {
+            if (err) {
+                res.send("An error ocurred getting losses");
+                throw err;
+            }
+            res.send(result);
+        });
+    });
+});
+
+router.post('/uploadpoints', (req, res) =>{
+    const { body } = req;
+
+    let con = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: "digui"
+    });
+
+    let id_nino = body.id_nino;
+    let id_juego = body.id_juego;
+    let puntos = body.puntos;
+
+    con.connect((err) => {
+        if (err) {
+            res.send("An error ocurred when connecting");
+            throw err;
+        }
+        let sql = `UPDATE Nino_Juego SET Puntaje = ${puntos} WHERE Nino_id = ${id_nino} AND Juego_id = ${id_juego}`;
+        con.query(sql, (err, result) => {
+            if (err) {
+                res.send("An error ocurred when uploading points");
+                throw err;
+            }
+            res.send(result);
+        });
+    });
+
+    res.send("Se han actualizado los puntos de manera exitosa");
+});
+
+router.get('/getpoints', (req, res) => {
+    let con = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: "digui"
+    });
+
+    let id_nino = req.query.id_nino;
+    let id_juego = req.query.id_juego;
+
+    con.connect((err) => {
+        if (err) {
+            res.send("An error ocurred when connecting");
+            throw err;
+        }
+        let sql = `SELECT Puntaje FROM Nino_Juego WHERE Nino_id = ${id_nino} AND Juego_id = ${id_juego}`;
+        con.query(sql, (err, result) => {
+            if (err) {
+                res.send("An error ocurred getting losses");
+                throw err;
+            }
+            res.send(result);
+        });
+    });
+});
+
+
 module.exports = router;
