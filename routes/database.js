@@ -1,12 +1,12 @@
 var express = require('express');
 var mysql = require('mysql2');
 var cors = require('cors');
-var fs = require('node:fs');
 require('dotenv').config({path:'/home/ubuntu/DiguiBackend/.env'});
 
 var router = express.Router();
 
-router.use(cors());
+router.use(cors({origin: true,credentials: true}));
+router.options('*', cors());
 
 router.use(express.json());
 
@@ -75,8 +75,6 @@ router.post('/addchild', (req, res) => {
 });
 
 router.get('/getparentschildren', (req, res) => {
-    const { body } = req;
-
     let con = mysql.createConnection({
         host: process.env.MYSQL_HOST,
         user: process.env.MYSQL_USER,
@@ -84,7 +82,7 @@ router.get('/getparentschildren', (req, res) => {
         database: "digui"
     });
 
-    let email_padre = body.email_padre;
+    let email_padre = req.query.email_padre;
 
     con.connect((err) => {
         if (err) {
