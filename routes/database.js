@@ -214,7 +214,7 @@ router.get('/getvictories', (req, res) => {
                 res.send("An error ocurred when creating child");
                 throw err;
             }
-            res.send(result);
+            res.send(result[0]);
         });
     });
 });
@@ -241,7 +241,7 @@ router.get('/getlosses', (req, res) => {
                 res.send("An error ocurred getting losses");
                 throw err;
             }
-            res.send(result);
+            res.send(result[0]);
         });
     });
 });
@@ -271,7 +271,6 @@ router.post('/uploadpoints', (req, res) =>{
                 res.send("An error ocurred when uploading points");
                 throw err;
             }
-            res.send(result);
         });
     });
 
@@ -300,7 +299,7 @@ router.get('/getpoints', (req, res) => {
                 res.send("An error ocurred getting losses");
                 throw err;
             }
-            res.send(result);
+            res.send(result[0]);
         });
     });
 });
